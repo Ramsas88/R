@@ -1,17 +1,16 @@
 
-
 library(shiny)
 library(shinyFeedback)
 
 ui <- fluidPage(
   fluidRow(column(4, actionButton("delete", "Delete all files?"))),
   br(),
-  fluidRow(column(4, offset=5, actionButton("copy", "Copy all files?")))
- )
+  fluidRow(column(4, actionButton("copy", "Copy all files?")))
+)
+
+
 
 server <- function(input, output, session) {
-  
-
   
   
   # delete file
@@ -23,17 +22,17 @@ server <- function(input, output, session) {
     "Are you sure you want to continue?",
     title = "Deleting files",
     footer = tagList(
-      actionButton("cancel", "Cancel"),
-      actionButton("ok", "Delete", class = "btn btn-danger")
+      actionButton("cancel1", "Cancel"),
+      actionButton("ok1", "Delete", class = "btn btn-danger")
     )
   )
-  observeEvent(input$ok, {
+  observeEvent(input$ok1, {
     showNotification("Files deleted")
     removeModal()
   })
-  observeEvent(input$cancel, {
+  observeEvent(input$cancel1, {
     removeModal()
-  });
+  })
   
   # copy files
   observeEvent(input$copy, {
@@ -44,17 +43,17 @@ server <- function(input, output, session) {
     "Are you sure you want to continue?",
     title = "Copy files",
     footer = tagList(
-      actionButton("cancel", "Cancel"),
-      actionButton("ok", "Copy", class = "btn-success")
+      actionButton("cancel2", "Cancel"),
+      actionButton("ok2", "Copy", class = "btn-success")
     )
   )
-        observeEvent(input$ok, {
-        showNotification("Files Copied")
-        removeModal()
-        })
-      observeEvent(input$cancel, {
-      removeModal()
-      })
+  observeEvent(input$ok2, {
+    showNotification("Files Copied")
+    removeModal()
+  })
+  observeEvent(input$cancel2, {
+    removeModal()
+  })
   
 }
 
